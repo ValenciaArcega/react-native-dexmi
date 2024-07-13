@@ -33,3 +33,9 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+.vs/
+.vscode/
+android/
+ios/
+variables.ts
