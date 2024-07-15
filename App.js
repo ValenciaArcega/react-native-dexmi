@@ -1,9 +1,10 @@
-import { SafeAreaView, Text, View } from 'react-native'
+import { NavigationContainer } from "@react-navigation/native"
+import Router from "./app/Router"
 
 export default function App() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   )
 }
