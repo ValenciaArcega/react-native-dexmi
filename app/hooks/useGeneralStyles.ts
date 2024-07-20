@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native"
 import { InterWeight } from "../constants/fonts"
 import { Platform } from "react-native"
-import { appColors } from "@/app/constants/colors"
+import { appColors } from "../constants/colors"
 import { useMatchMedia } from "./useMatchMedia"
 
 export function useGeneralStyles() {
@@ -246,6 +246,29 @@ export function useGeneralStyles() {
 		wrapperMultimediaIcon: {
 			fontSize: 28,
 			color: appColors.mainColor,
-		}
+		},
+		separator: {
+			borderBottomColor: "#eee",
+			borderBottomWidth: 2,
+			width: "100%",
+			height: 4,
+			marginVertical: 20
+		},
+		wrapperCalendar: {
+			flexDirection: "row",
+			alignItems: "center",
+			height: 52,
+			width: "100%",
+			gap: isiOS ? 0 : 10,
+		},
+		txtDate: {
+			fontFamily: InterWeight.w500,
+			fontSize: 17,
+			color: "#181818",
+			backgroundColor: "#edf2ff",
+			padding: 8,
+			paddingHorizontal: 16,
+			borderRadius: 8
+		},
 	})
 }

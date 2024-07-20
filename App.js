@@ -1,4 +1,4 @@
-import Router from "@/app/routes/Router"
+import { Router } from "@/app/routes/Router"
 import Toast from 'react-native-toast-message'
 import { toastConfig } from "@/app/components/Toast"
 import { UserContext } from "@/app/context/UserContext"
