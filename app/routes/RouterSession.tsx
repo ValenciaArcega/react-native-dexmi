@@ -2,8 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useBottomTabStyles } from "../hooks/useBottomTabStyles"
 import { appColors } from "../constants/colors"
 import { Ionicons } from "@expo/vector-icons"
-import { News } from "@/app/core/news/News"
-import { RouterMaterialTabs } from "./RouterMaterialTabs"
+import { News } from "./RouterMaterialTabsNews"
 
 const bStack = createBottomTabNavigator()
 
@@ -23,23 +22,11 @@ export function RouterSession() {
 			}}
 			initialRouteName="HomeTenedor">
 			<bStack.Screen
-				name="RouterMaterialTabs"
-				component={RouterMaterialTabs}
+				name="News"
+				component={News}
 				options={{
 					tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} size={30} color={color} />
 				}} />
-			{/* <bStack.Screen
-					name="RouterHubTenedor"
-					component={RouterHub}
-					options={{
-						tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "grid" : "grid-outline"} size={28} color={color} />
-					}} />
-				<bStack.Screen
-					name="RouterProfileTenedor"
-					component={RouterProfile}
-					options={{
-						tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "person-circle" : "person-circle-outline"} size={34} color={color} />
-					}} /> */}
 		</bStack.Navigator>
 	)
 }

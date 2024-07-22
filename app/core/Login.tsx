@@ -1,13 +1,12 @@
-import SafeKeyboardScroll from "@/app/layout/SafeKeyboardScroll"
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native"
-import { appColors } from "../constants/colors"
 import { useGeneralStyles } from "../hooks/useGeneralStyles"
 import { BtnLinearRegularShade } from "../components/Buttons"
+import ViewKeyboardScroll from "../layout/ViewKeyboardScroll"
 
 export default function Login() {
 	const gs = useGeneralStyles()
 
-	return <SafeKeyboardScroll style={{ backgroundColor: "#e6fcf5" }}>
+	return <ViewKeyboardScroll isSafeArea={true} style={{ backgroundColor: "#e6fcf5" }}>
 		<View style={{
 			margin: 32,
 			flex: 1,
@@ -38,5 +37,5 @@ export default function Login() {
 				</BtnLinearRegularShade>
 			</TouchableOpacity>
 		</View>
-	</SafeKeyboardScroll >
+	</ViewKeyboardScroll >
 }
