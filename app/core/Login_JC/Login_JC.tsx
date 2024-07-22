@@ -4,7 +4,6 @@ import { Dropdown } from "./Components/Dropdown";
 const s = styles()
 const { width, height } = Dimensions.get('window');
 
-
 export const LoginJC = () => {
     return <>
         <View>

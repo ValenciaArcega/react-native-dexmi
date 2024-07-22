@@ -5,53 +5,38 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import { usePlatform } from '../hooks/usePlatform';
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context"
 
-type ViewKeyboardScrollProps = {
+type ViewKeyboardProps = {
 	children: React.ReactNode,
 	style?: any,
 	isSafeArea?: boolean
+	viewStyles?: any,
+	keyboardStyles?: any
 }
 
-export default function ViewKeyboardScroll({
+export default function ViewKeyboard({
 	children,
-	style,
+	viewStyles,
+	keyboardStyles,
 	isSafeArea = false
-}: ViewKeyboardScrollProps) {
+}: ViewKeyboardProps) {
 	const heightHeader = useHeaderHeight();
 	const gs = useGeneralStyles();
-	const { isAndroid, isiOS } = usePlatform()
+	const { isiOS } = usePlatform()
 	const behavior = isiOS ? "padding" : "height";
 	const insets = useSafeAreaInsets()
-	const [keyboardVisible, setKeyboardVisible] = useState(false);
-
-	useEffect(() => {
-		if (isAndroid) {
-			const showListener = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
-			const hideListener = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
-
-			return () => {
-				showListener.remove();
-				hideListener.remove();
-			};
-		}
-	}, []);
 
 	return (
 		<SafeAreaProvider>
 			<View style={[gs.containerView, {
 				paddingTop: isSafeArea ? insets.top : 0,
-				...style
+				...viewStyles
 			}]}>
 				<KeyboardAvoidingView
 					behavior={behavior}
-					style={{ flex: 1 }}
+					style={{ flex: 1, ...keyboardStyles }}
 					keyboardVerticalOffset={isiOS ? heightHeader : 0}
 				>
-					<ScrollView
-						keyboardDismissMode="on-drag"
-						contentInsetAdjustmentBehavior="automatic"
-						contentContainerStyle={[gs.scroll, { flexGrow: keyboardVisible ? 1 : 0 }]}>
-						{children}
-					</ScrollView>
+					{children}
 				</KeyboardAvoidingView>
 			</View>
 		</SafeAreaProvider>
