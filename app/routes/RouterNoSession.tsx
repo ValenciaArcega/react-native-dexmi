@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from '../core/Login';
+import { IniciarSesion } from '../core/Login_JC/IniciarSesion';
+import { Home } from '../core/Login_JC/Home';
 
 export function RouterNoSession() {
 	const stack = createNativeStackNavigator()
@@ -26,7 +27,11 @@ export function RouterNoSession() {
 		!isValidating && <stack.Navigator initialRouteName={isFirstTime ? "Login" : "Onboarding"}>
 			<stack.Screen
 				name="Login"
-				component={Login}
+				component={Home}
+				options={{ headerShown: false, animation: "fade" }} />
+			<stack.Screen
+				name="IniciarSesion"
+				component={IniciarSesion}
 				options={{ headerShown: false, animation: "fade" }} />
 		</stack.Navigator>
 	);

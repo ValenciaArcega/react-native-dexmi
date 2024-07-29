@@ -8,14 +8,18 @@ export async function apiRequest<T>(
     url: string,
     method: RequestMethod,
     params: RequestParams = {},
-    headers: RequestParams = { "Content-Type": "application/json" }
+    headers: RequestParams = { "Content-Type": "application/json" },
+    additionalHeaders: RequestParams = {}
 ): Promise<T> {
     try {
+        const combinedHeaders = {
+            ...headers,
+            ...additionalHeaders,
+        };
+
         const options: RequestInit = {
             method,
-            headers: {
-                ...headers,
-            },
+            headers: combinedHeaders,
         };
 
         if (method === "POST" || method === "PUT" || method === "PATCH") {
