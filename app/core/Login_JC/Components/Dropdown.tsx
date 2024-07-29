@@ -14,9 +14,9 @@ interface ApiResponse {
     listElementsDex: { id: string; name: string }[];
 }
 //image: require('@/assets/img/Login_JC/ame.png')
-export const Dropdown = () => {
+export const Dropdown = ({ onSelect }) => {
     const [country, setCountry] = useState<string>();
-    const [local_data, setLocal_data] = useState<Club[]>([]);
+    const [dataResponse, setDataResponse] = useState<Club[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,8 +34,7 @@ export const Dropdown = () => {
                         image: require('@/assets/img/Login_JC/ame.png')
                     };
                 });
-                console.log(data);
-                setLocal_data(data);
+                setDataResponse(data);
             } catch (error) {
                 console.log(error);
             }
@@ -43,25 +42,26 @@ export const Dropdown = () => {
         fetchData();
     }, []);
 
+    const handleSelectChange = (e) => {
+        setCountry(e.value)
+        onSelect({ label: e.label, value: e.value })
+    }
     return (
         <SelectCountry
-            search
+            dropdownPosition="bottom"
             style={styles.dropdown}
             selectedTextStyle={styles.selectedTextStyle}
             placeholderStyle={styles.placeholderStyle}
             imageStyle={styles.imageStyle}
             iconStyle={styles.iconStyle}
-            maxHeight={200}
+            maxHeight={100}
             value={country}
-            data={local_data}
+            data={dataResponse}
             valueField="value"
             labelField="label"
             imageField="image"
-            placeholder="Selecciona el club"
-            searchPlaceholder="Buscar..."
-            onChange={(e) => {
-                setCountry(e.value);
-            }}
+            placeholder="Presiona para ver los clubs"
+            onChange={handleSelectChange}
         />
     );
 };
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: '#EEEEEE',
         borderRadius: 10,
-        paddingHorizontal: 16,
+        paddingHorizontal: 7,
     },
     imageStyle: {
         width: 30,
