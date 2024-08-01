@@ -4,11 +4,24 @@ import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 const promotions = [
 	{
 		idNew: 1,
-		title: "¿Cómo registrar a tu equipo en otra liga?",
+		userAvatar: "https://unavatar.io/github/mdo",
+		userName: "Angel Valencia",
+		title: "¿Registrar a tu equipo en otra liga?",
 		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt iste aliquam, eum fugit aspernatur quibusdam dolorem vel, alias atque vitae optio delectus nostrum quia? Quam.",
-		imgUrl: "https://images.unsplash.com/photo-1701872324304-fceed8b2785b?q=80&w=2650&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-	}
+		imgUrl: "https://images.unsplash.com/photo-1627834248396-e0892e56f83e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		timeAgo: "Hace 1 hora",
+	},
+	{
+		idNew: 2,
+		userAvatar: "https://unavatar.io/github/mdo",
+		userName: "Edson Eduardo",
+		title: "Contribuciones a la comunidad",
+		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt iste aliquam, eum fugit aspernatur quibusdam dolorem vel, alias atque vitae optio delectus nostrum quia? Quam.",
+		imgUrl: "https://images.unsplash.com/photo-1532262757596-f93a9d92f879?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		timeAgo: "Hace 2 horas",
+	},
 ]
+
 export function Promotions() {
 	const { isAndroid } = usePlatform();
 
@@ -18,12 +31,9 @@ export function Promotions() {
 	}}>
 		<FlatList
 			data={promotions}
-			numColumns={2}
-			columnWrapperStyle={{ justifyContent: 'space-between' }}
 			keyExtractor={(item) => item.idNew.toString()}
 			style={{
-				// paddingTop: isAndroid ? 0 : 158,
-				backgroundColor: "#fff",
+				backgroundColor: "#f2f2f7",
 				minWidth: "100%",
 			}}
 			/* ListEmptyComponent={() => (
@@ -49,30 +59,60 @@ export function Promotions() {
 						key={item.idNew}
 						onPress={() => getNewDetails_onPress(item.idNew)}
 						style={{
-							paddingVertical: 16,
 							width: "100%",
+							marginVertical: 12,
+							borderWidth: 1,
+							borderColor: "#ccc",
+							paddingVertical: 24,
+							paddingHorizontal: 20,
 							backgroundColor: "white",
-							paddingHorizontal: 16,
 						}}>
+
+						<Text style={{
+							color: "#aaa",
+							fontSize: 14,
+							position: "absolute",
+							top: 16,
+							right: 16,
+						}}>{item.timeAgo}</Text>
+
+						<View style={{
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 8,
+						}}>
+							<Image
+								width={32}
+								height={32}
+								style={{
+									borderRadius: 16,
+								}}
+								source={{ uri: item.userAvatar }} />
+							<Text style={{
+								fontSize: 16,
+								color: "#181818",
+							}}>{item.userName}</Text>
+						</View>
+
 						<Image
 							source={{ uri: item.imgUrl }}
 							style={{
+								marginTop: 12,
 								width: "100%",
 								height: 200,
-								borderRadius: 12,
+								borderRadius: 16,
 							}} />
 						<Text style={{
-							fontSize: 17,
+							fontSize: 19,
 							fontWeight: "bold",
 							color: "#181818",
-							marginTop: 12,
+							marginVertical: 16,
 						}}>
 							{item.title}</Text>
 						<Text style={{
 							fontSize: 17,
 							color: "#aaa",
-							marginTop: 8,
-							lineHeight: 22,
+							lineHeight: 28,
 						}}>
 							{item.description}</Text>
 					</TouchableOpacity>
