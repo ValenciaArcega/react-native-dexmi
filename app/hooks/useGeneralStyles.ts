@@ -111,7 +111,7 @@ export function useGeneralStyles() {
 			width: "100%",
 			borderRadius: 18,
 			overflow: "hidden",
-			backgroundColor: appColors.mainColorBold,
+			backgroundColor: appColors.p600,
 			alignItems: "center",
 			justifyContent: "center"
 		},
@@ -134,7 +134,7 @@ export function useGeneralStyles() {
 		btnBaseSecondary: {
 			marginTop: 32,
 			height: 60,
-			backgroundColor: appColors.mainColorTint2,
+			backgroundColor: appColors.p200,
 			borderRadius: 16,
 			alignItems: "center",
 			justifyContent: "center",
@@ -142,7 +142,7 @@ export function useGeneralStyles() {
 		btnBaseSecondaryText: {
 			fontSize: 19,
 			fontFamily: InterWeight.w500,
-			color: appColors.mainColorShade,
+			color: appColors.p600,
 		},
 		btnNavigateDetail: {
 			minWidth: "60%",
@@ -241,11 +241,11 @@ export function useGeneralStyles() {
 		wrapperMultimediaTxt: {
 			fontSize: 17,
 			fontFamily: InterWeight.w500,
-			color: appColors.mainColor,
+			color: appColors.p200,
 		},
 		wrapperMultimediaIcon: {
 			fontSize: 28,
-			color: appColors.mainColor,
+			color: appColors.p400,
 		},
 		separator: {
 			borderBottomColor: "#eee",

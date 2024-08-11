@@ -6,8 +6,10 @@ export function useBottomTabStyles() {
 
 	return StyleSheet.create({
 		tabBarStyle: {
-			height: (isMediumPhone && Platform.OS === "ios") ? 94 : 64,
+			height: 92,
 			backgroundColor: "white",
+			borderTopWidth: 1,
+			borderTopColor: "#aaa",
 		},
 
 		tabBarIconView: {

@@ -1,4 +1,3 @@
-import SafeKeyboardScroll from "@/app/layout/SafeKeyboardScroll"
 import { Alert, Dimensions, Image, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { Dropdown } from "./Components/Dropdown";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

@@ -1,32 +1,48 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { useBottomTabStyles } from "../hooks/useBottomTabStyles"
-import { appColors } from "../constants/colors"
-import { Ionicons } from "@expo/vector-icons"
-import { News } from "./RouterMaterialTabsNews"
-
-const bStack = createBottomTabNavigator()
+import { Pressable } from "react-native";
+import { appColors } from "../constants/colors";
+import { DetailNew } from "../core/news/DetailNew";
+import { RouterMaterialTabsNews } from "./RouterMaterialTabsNews";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export function RouterSession() {
-	const bottomTabStyles = useBottomTabStyles()
+	const Stack = createNativeStackNavigator()
 
 	return (
-		<bStack.Navigator
-			backBehavior="none"
+		<Stack.Navigator
+			initialRouteName="News"
 			screenOptions={{
-				headerShown: false,
-				tabBarShowLabel: false,
-				tabBarHideOnKeyboard: true,
-				tabBarStyle: bottomTabStyles.tabBarStyle,
-				tabBarActiveTintColor: appColors.mainColorShade,
-				tabBarInactiveTintColor: "gray",
-			}}
-			initialRouteName="HomeTenedor">
-			<bStack.Screen
+				headerBackTitle: "Atrás",
+				headerLargeTitle: true,
+				headerShadowVisible: true,
+				headerLargeTitleShadowVisible: true,
+				headerTitleStyle: {
+					fontSize: 22,
+					color: appColors.p600,
+				},
+				headerLargeStyle: {
+					backgroundColor: appColors.bgWhite,
+				},
+				headerStyle: {
+					backgroundColor: appColors.bgWhite,
+				},
+			}}>
+			<Stack.Screen
 				name="News"
-				component={News}
+				component={RouterMaterialTabsNews}
+				options={{ headerLargeTitle: false }} />
+			<Stack.Screen
+				name="DetailsNew"
+				component={DetailNew}
 				options={{
-					tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} size={30} color={color} />
-				}} />
-		</bStack.Navigator>
+					title: "Detalles",
+					headerRight: () => (
+						<Pressable>
+							<MaterialIcons name="insert-comment" size={24} color={appColors.p600} />
+						</Pressable>
+					)
+				}}
+			/>
+		</Stack.Navigator>
 	)
 }

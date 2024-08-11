@@ -1,7 +1,7 @@
 import React, { useContext, ReactElement } from "react"
 import { contextUser } from "@/app/context/UserContext"
 import { RouterNoSession } from "./RouterNoSession"
-import { RouterSession } from "./RouterSession"
+import { RouterBottom } from "./RouterBottom"
 
 export function Router(): ReactElement {
 	const { globalUser } = useContext(contextUser)
@@ -9,6 +9,6 @@ export function Router(): ReactElement {
 	if (globalUser) {
 		return <RouterNoSession />
 	} else {
-		return <RouterSession />
+		return <RouterBottom />
 	}
 }

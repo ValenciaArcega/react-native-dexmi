@@ -1,36 +1,44 @@
-import { usePlatform } from "@/app/hooks/usePlatform";
+import { HC_PROMOTIONS } from "@/app/constants/hardCode";
+import { useNavigateApp } from "@/app/hooks/useNavigateApp";
+import { useEffect } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
-const promotions = [
-	{
-		idNew: 1,
-		userAvatar: "https://unavatar.io/github/mdo",
-		userName: "Angel Valencia",
-		title: "¿Registrar a tu equipo en otra liga?",
-		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt iste aliquam, eum fugit aspernatur quibusdam dolorem vel, alias atque vitae optio delectus nostrum quia? Quam.",
-		imgUrl: "https://images.unsplash.com/photo-1627834248396-e0892e56f83e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		timeAgo: "Hace 1 hora",
-	},
-	{
-		idNew: 2,
-		userAvatar: "https://unavatar.io/github/mdo",
-		userName: "Edson Eduardo",
-		title: "Contribuciones a la comunidad",
-		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt iste aliquam, eum fugit aspernatur quibusdam dolorem vel, alias atque vitae optio delectus nostrum quia? Quam.",
-		imgUrl: "https://images.unsplash.com/photo-1532262757596-f93a9d92f879?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		timeAgo: "Hace 2 horas",
-	},
-]
-
 export function Promotions() {
-	const { isAndroid } = usePlatform();
+	const navigation = useNavigateApp()
+
+	useEffect(() => {
+		// getPromotions()
+	}, [])
+
+	const getPromotions = async function () {
+		try {
+			const response = await fetch("https://kube.vde-suite.com/mx/dexmi/v1/sports/notifications", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"DEX-KEY-ENV": "6235a64b5b8a5392808d67eec08e4b11",
+				}, body: JSON.stringify({
+					"Notifications": [
+						{
+							"user": "d29f894ad6c901bc3fac1ab078020264",
+							"model": "news"
+						}
+					]
+				}
+				)
+			})
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	return <View style={{
 		backgroundColor: "pink",
 		flex: 1,
 	}}>
 		<FlatList
-			data={promotions}
+			data={HC_PROMOTIONS}
 			keyExtractor={(item) => item.idNew.toString()}
 			style={{
 				backgroundColor: "#f2f2f7",
@@ -40,24 +48,10 @@ export function Promotions() {
 				<Text style={{ fontSize: 22, marginTop: "50%", textAlign: "center", color: "gray", lineHeight: 36, paddingHorizontal: 16 }}> Aún no tienes una sucursal, da click al botón de <Text style={{ color: "black", fontSize: 32, }}>+</Text> para agregar una nueva.</Text>
 			)} */
 			renderItem={({ item, index }) => {
-				/* const gradients = [
-					['#90d9a1', "#d6ff7b"],
-					['#faafff', "#7bc5ff"],
-					['#b8afff', "#7b96ff"]
-				];
-				const selectedGradient = gradients[index % 3];
-				<LinearGradient
-					style={{
-						width: "100%",
-						height: "22%"
-					}}
-					start={{ x: 0, y: 0 }}
-					end={{ x: 1, y: 0 }}
-					colors={selectedGradient} /> */
 				return (
 					<TouchableOpacity
 						key={item.idNew}
-						onPress={() => getNewDetails_onPress(item.idNew)}
+						onPress={() => navigation.navigate("DetailsNew", { item })}
 						style={{
 							width: "100%",
 							marginVertical: 12,
@@ -120,8 +114,4 @@ export function Promotions() {
 			}}
 		/>
 	</View>
-
-	function getNewDetails_onPress(idNew: number) {
-
-	}
 }
