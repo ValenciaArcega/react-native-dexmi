@@ -4,6 +4,12 @@ interface RequestParams {
     [key: string]: any;
 }
 
+export interface ApiResponse {
+    success: boolean;
+    message: string;
+    listElementsDex: { id: string; name: string }[];
+}
+
 export async function apiRequest<T>(
     url: string,
     method: RequestMethod,
