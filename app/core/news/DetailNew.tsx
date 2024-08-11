@@ -25,7 +25,7 @@ export function DetailNew({ route }) {
 				}}>{item.title}</Text>
 				<Text style={{
 					marginVertical: 8,
-					color: appColors.mainColorShade,
+					color: appColors.green700,
 				}}>{item.timeAgo}</Text>
 				<Text style={{
 					lineHeight: 28,
@@ -37,8 +37,8 @@ export function DetailNew({ route }) {
 					borderRadius: 14,
 					overflow: "hidden",
 				}}>
-					<CustomGradient colors={[appColors.mainColorTint, appColors.mainColor]}>
-						<MaterialCommunityIcons name="file-download" size={32} color="black" />
+					<CustomGradient colors={[appColors.p400, appColors.p600]}>
+						<MaterialCommunityIcons name="file-download" size={32} color={appColors.frWhite} />
 						<Text style={{ fontSize: 19 }}>Descargar Documento</Text>
 					</CustomGradient>
 				</Pressable>

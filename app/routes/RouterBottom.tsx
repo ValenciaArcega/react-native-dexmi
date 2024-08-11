@@ -18,7 +18,7 @@ export function RouterBottom() {
 				tabBarShowLabel: false,
 				tabBarHideOnKeyboard: true,
 				tabBarStyle: bottomTabStyles.tabBarStyle,
-				tabBarActiveTintColor: appColors.mainColorShade,
+				tabBarActiveTintColor: appColors.p800,
 				tabBarInactiveTintColor: "gray",
 			}}>
 			<bStack.Screen

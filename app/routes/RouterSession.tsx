@@ -18,7 +18,7 @@ export function RouterSession() {
 				headerLargeTitleShadowVisible: true,
 				headerTitleStyle: {
 					fontSize: 22,
-					color: appColors.mainColorShade,
+					color: appColors.p600,
 				},
 				headerLargeStyle: {
 					backgroundColor: appColors.bgWhite,
@@ -38,7 +38,7 @@ export function RouterSession() {
 					title: "Detalles",
 					headerRight: () => (
 						<Pressable>
-							<MaterialIcons name="insert-comment" size={24} color={appColors.mainColorShade} />
+							<MaterialIcons name="insert-comment" size={24} color={appColors.p600} />
 						</Pressable>
 					)
 				}}

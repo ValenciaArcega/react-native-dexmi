@@ -1,21 +1,9 @@
 import React, { useCallback } from "react"
 import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet'
-import { Text } from "react-native"
-import { useMatchMedia } from "@/app/hooks/useMatchMedia"
 import { StyleSheet } from "react-native"
-import { InterWeight } from "@/app/constants/fonts"
+import { BottomsheetBasicProps } from "@/app/types/componentProps"
 
-type BottomsheetBasicProps = {
-	children: React.ReactNode
-	snapPoints: string[]
-	hasBackdrop?: boolean
-	refBottomSheet?: React.RefObject<BottomSheet>
-	isCloseOnDrag?: boolean
-	backDropPress?: "close" | "none"
-	style?: any
-}
-
-export function BottomsheetAuctionTracking({ children, refBottomSheet, snapPoints, hasBackdrop = true, isCloseOnDrag = false, backDropPress = "none", style }: BottomsheetBasicProps) {
+export function CustomBottomSheet({ children, refBottomSheet, snapPoints, hasBackdrop = true, isCloseOnDrag = false, backDropPress = "none", style, onClose }: BottomsheetBasicProps) {
 	const styles = useStylesBottomSheet()
 
 	const renderBackdrop = useCallback(function (props) {
@@ -30,9 +18,10 @@ export function BottomsheetAuctionTracking({ children, refBottomSheet, snapPoint
 			style={styles.bottomSheet}
 			ref={refBottomSheet}
 			index={0}
+			onClose={onClose}
 			backdropComponent={hasBackdrop ? renderBackdrop : null}
 			snapPoints={snapPoints}
-			handleIndicatorStyle={{ backgroundColor: '#c5c5c5', width: 48, height: 4, marginTop: 6 }}
+			handleIndicatorStyle={{ backgroundColor: '#c5c5c5', width: 48, height: 4, marginTop: 4 }}
 			enablePanDownToClose={isCloseOnDrag}>
 			<BottomSheetView style={[styles.contentContainer, { ...style }]}>
 				{children}
@@ -48,20 +37,7 @@ export function useStylesBottomSheet() {
 		},
 		contentContainer: {
 			paddingHorizontal: 32,
-			// backgroundColor: 'transparent',
 			height: '100%',
-		},
-		txtHeader: {
-			marginTop: 18,
-			letterSpacing: -.5,
-			fontSize: 24,
-			fontFamily: InterWeight.w600,
-		},
-		txtDescription: {
-			color: 'gray',
-			marginTop: 4,
-			fontSize: 18,
-			lineHeight: 30,
 		},
 	})
 }

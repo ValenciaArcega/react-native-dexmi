@@ -10,23 +10,26 @@ export function RouterNoSession() {
 	const [isValidating, setIsValidating] = useState<boolean>(true)
 
 	useEffect(() => {
-		(async function () {
-			const flag = Boolean(JSON.parse(await AsyncStorage.getItem("FIRST_INSTALLATION")))
-
-			if (flag) {
-				setIsFirstTime(true)
-				setIsValidating(false)
-			} else {
-				await AsyncStorage.setItem("FIRST_INSTALLATION", 'true')
-				setIsValidating(false)
-			}
-		})()
+		reviewAppStatus()
 	}, [])
 
+	const reviewAppStatus = async function () {
+		const flag = Boolean(JSON.parse(await AsyncStorage.getItem("HAS_BEEN_INSTALLED")))
+
+		if (flag) {
+			setIsFirstTime(false)
+			setIsValidating(false)
+		} else {
+			setIsFirstTime(true)
+			await AsyncStorage.setItem("HAS_BEEN_INSTALLED", JSON.stringify(true))
+			setIsValidating(false)
+		}
+	}
+
 	return (
-		!isValidating && <stack.Navigator initialRouteName={isFirstTime ? "Login" : "Onboarding"}>
+		!isValidating && <stack.Navigator initialRouteName={isFirstTime ? "Onboarding" : "IniciarSesion"}>
 			<stack.Screen
-				name="Login"
+				name="Home"
 				component={Home}
 				options={{ headerShown: false, animation: "fade" }} />
 			<stack.Screen
