@@ -5,7 +5,7 @@ import { RouterMaterialTabsNews } from "./RouterMaterialTabsNews";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export function RouterSession() {
+export function RouterNews() {
 	const Stack = createNativeStackNavigator()
 
 	return (

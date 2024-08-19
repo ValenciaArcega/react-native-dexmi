@@ -1,36 +1,44 @@
+import { apiRequest, ApiResponse } from "@/app/API/GeneralAPI";
+import { LoaderActivity } from "@/app/components/LoaderActivity";
 import { HC_PROMOTIONS } from "@/app/constants/hardCode";
 import { useNavigateApp } from "@/app/hooks/useNavigateApp";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
 export function Promotions() {
 	const navigation = useNavigateApp()
+	const [promociones, setPromociones] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		// getPromotions()
+		getPromotions()
 	}, [])
 
 	const getPromotions = async function () {
 		try {
-			const response = await fetch("https://kube.vde-suite.com/mx/dexmi/v1/sports/notifications", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"DEX-KEY-ENV": "6235a64b5b8a5392808d67eec08e4b11",
-				}, body: JSON.stringify({
+			const response = await apiRequest<ApiResponse>("https://kube.vde-suite.com/mx/dexmi/v1/sports/notifications", "POST",
+				{
 					"Notifications": [
 						{
 							"user": "d29f894ad6c901bc3fac1ab078020264",
 							"model": "news"
 						}
 					]
-				}
-				)
-			})
-			console.log(response);
+				},
+				{ "Content-Type": "application/json" },
+				{ "DEX-KEY-ENV": "6235a64b5b8a5392808d67eec08e4b11" },
+			)
+			setPromociones(response.listElementsDex);
 		} catch (error) {
 			console.log(error);
 		}
+		finally {
+			setIsLoading(false);
+		}
+	}
+
+	if (isLoading) {
+		return <LoaderActivity />
 	}
 
 	return <View style={{
@@ -38,8 +46,8 @@ export function Promotions() {
 		flex: 1,
 	}}>
 		<FlatList
-			data={HC_PROMOTIONS}
-			keyExtractor={(item) => item.idNew.toString()}
+			data={promociones}
+			keyExtractor={(item) => item.message.title.toString()}
 			style={{
 				backgroundColor: "#f2f2f7",
 				minWidth: "100%",
@@ -50,8 +58,8 @@ export function Promotions() {
 			renderItem={({ item, index }) => {
 				return (
 					<TouchableOpacity
-						key={item.idNew}
-						onPress={() => navigation.navigate("DetailsNew", { item })}
+						key={index}
+						onPress={() => navigation.navigate("DetailsNew", item.message)}
 						style={{
 							width: "100%",
 							marginVertical: 12,
@@ -61,7 +69,7 @@ export function Promotions() {
 							paddingHorizontal: 20,
 							backgroundColor: "white",
 						}}>
-
+						{/*
 						<Text style={{
 							color: "#aaa",
 							fontSize: 14,
@@ -70,7 +78,7 @@ export function Promotions() {
 							right: 16,
 						}}>{item.timeAgo}</Text>
 
-						<View style={{
+						 <View style={{
 							flexDirection: "row",
 							alignItems: "center",
 							gap: 8,
@@ -86,10 +94,10 @@ export function Promotions() {
 								fontSize: 16,
 								color: "#181818",
 							}}>{item.userName}</Text>
-						</View>
+						</View> */}
 
 						<Image
-							source={{ uri: item.imgUrl }}
+							source={{ uri: item.message.image }}
 							style={{
 								marginTop: 12,
 								width: "100%",
@@ -102,13 +110,13 @@ export function Promotions() {
 							color: "#181818",
 							marginVertical: 16,
 						}}>
-							{item.title}</Text>
+							{item.message.title}</Text>
 						<Text style={{
 							fontSize: 17,
 							color: "#aaa",
 							lineHeight: 28,
 						}}>
-							{item.description}</Text>
+							{item.message.resume}</Text>
 					</TouchableOpacity>
 				)
 			}}
