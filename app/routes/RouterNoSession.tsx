@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { IniciarSesion } from '../core/Login_JC/IniciarSesion';
 import { Home } from '../core/Login_JC/Home';
+import { useUser } from '../hooks/useUser';
 
 export function RouterNoSession() {
 	const stack = createNativeStackNavigator()
 	const [isFirstTime, setIsFirstTime] = useState<boolean | null>(null)
 	const [isValidating, setIsValidating] = useState<boolean>(true)
+	const { setGlobalUser } = useUser()
 
 	useEffect(() => {
+		setGlobalUser(null)
 		reviewAppStatus()
 	}, [])
 
@@ -27,7 +30,7 @@ export function RouterNoSession() {
 	}
 
 	return (
-		!isValidating && <stack.Navigator initialRouteName={isFirstTime ? "Onboarding" : "IniciarSesion"}>
+		!isValidating && <stack.Navigator initialRouteName={isFirstTime ? "Onboarding" : "Home"}>
 			<stack.Screen
 				name="Home"
 				component={Home}

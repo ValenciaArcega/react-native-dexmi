@@ -6,12 +6,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image, Pressable, Text, View } from "react-native";
 
 export function DetailNew({ route }) {
-	const item = route.params
+	const { item, image } = route.params
+	console.log(image, item)
 
-	console.log(item.title)
 	return <CustomView isSafeArea={false} style={{ backgroundColor: appColors.bgWhite }}>
 		<CustomScroll adjustContent={true}>
-			<Image source={{ uri: item.image }}
+			<Image source={{ uri: image }}
 				style={{
 					width: "100%",
 					height: "40%",
@@ -23,7 +23,7 @@ export function DetailNew({ route }) {
 				<Text style={{
 					fontSize: 20,
 					fontWeight: "bold",
-				}}>{item.title}</Text>
+				}}>{item.message.title}</Text>
 				<Text style={{
 					marginVertical: 8,
 					color: appColors.green700,

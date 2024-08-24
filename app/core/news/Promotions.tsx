@@ -1,6 +1,7 @@
 import { apiRequest, ApiResponse } from "@/app/API/GeneralAPI";
 import { LoaderActivity } from "@/app/components/LoaderActivity";
 import { HC_PROMOTIONS } from "@/app/constants/hardCode";
+import { useFiles } from "@/app/hooks/useFiles";
 import { useNavigateApp } from "@/app/hooks/useNavigateApp";
 import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
@@ -9,6 +10,8 @@ export function Promotions() {
 	const navigation = useNavigateApp()
 	const [promociones, setPromociones] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [images, setImages] = useState([]);
+	const { saveBase64ToFile } = useFiles()
 
 	useEffect(() => {
 		getPromotions()
@@ -29,6 +32,11 @@ export function Promotions() {
 				{ "DEX-KEY-ENV": "6235a64b5b8a5392808d67eec08e4b11" },
 			)
 			setPromociones(response.listElementsDex);
+			response.listElementsDex.forEach(async (element) => {
+				const base64 = await saveBase64ToFile(element.message.image)
+
+				setImages((prev) => [...prev, base64])
+			})
 		} catch (error) {
 			console.log(error);
 		}
@@ -59,7 +67,7 @@ export function Promotions() {
 				return (
 					<TouchableOpacity
 						key={index}
-						onPress={() => navigation.navigate("DetailsNew", item.message)}
+						onPress={() => navigation.navigate("DetailsNew", { item, image: images[index] })}
 						style={{
 							width: "100%",
 							marginVertical: 12,
@@ -97,7 +105,7 @@ export function Promotions() {
 						</View> */}
 
 						<Image
-							source={{ uri: item.message.image }}
+							source={{ uri: images[index] }}
 							style={{
 								marginTop: 12,
 								width: "100%",
