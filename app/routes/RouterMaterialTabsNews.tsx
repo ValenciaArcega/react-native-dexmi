@@ -4,19 +4,13 @@ import { View } from 'react-native';
 
 const materialTabs = createMaterialTopTabNavigator();
 
-// export function News() {
-// 	return <ViewKeyboard isSafeArea={true}>
-// 		<RouterMaterialTabsNews />
-// 	</ViewKeyboard >
-// }
-
 export function RouterMaterialTabsNews() {
 	return <View style={{ flex: 1 }}>
 		<materialTabs.Navigator style={{ marginTop: 0 }}>
 			<materialTabs.Screen
 				name="Promotions"
 				options={{
-					tabBarLabel: "Promociones 🚀",
+					tabBarLabel: "Promociones",
 					tabBarLabelStyle: {
 						textTransform: "capitalize"
 					}
@@ -24,6 +18,12 @@ export function RouterMaterialTabsNews() {
 				component={Promotions} />
 			<materialTabs.Screen
 				name="Eventos"
+				options={{
+					tabBarLabel: "Eventos",
+					tabBarLabelStyle: {
+						textTransform: "capitalize"
+					}
+				}}
 				component={Events} />
 		</materialTabs.Navigator>
 	</View>
