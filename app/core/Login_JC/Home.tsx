@@ -1,18 +1,19 @@
-import { Alert, Dimensions, Image, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Alert, Image, Platform, StyleSheet, Text, View } from "react-native"
 import { Dropdown } from "./Components/Dropdown";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CustomPressable } from "./Components/Pressable";
-import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import { useNavigateApp } from "@/app/hooks/useNavigateApp";
 const s = styles()
+
 export const Home = () => {
     const { top, bottom } = useSafeAreaInsets();
     const [selected, setSelected] = useState<{ label: string, value: string }>(null);
-    const navigation: NavigationProp<ParamListBase> = useNavigation();
+    const { navigateTo } = useNavigateApp()
 
     const handlePress = () => {
         if (selected) {
-            navigation.navigate("IniciarSesion", { selectedClub: selected });
+            navigateTo("IniciarSesion", { selectedClub: selected });
         } else {
             Alert.alert("Error", "Selecciona un club");
         }

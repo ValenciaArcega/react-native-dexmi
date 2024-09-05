@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
 export function Promotions() {
-	const navigation = useNavigateApp()
+	const { navigateTo } = useNavigateApp()
 	const [promociones, setPromociones] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [images, setImages] = useState([]);
@@ -67,7 +67,7 @@ export function Promotions() {
 				return (
 					<TouchableOpacity
 						key={index}
-						onPress={() => navigation.navigate("DetailsNew", { item, image: images[index] })}
+						onPress={() => navigateTo("DetailsNew", { item, image: images[index] })}
 						style={{
 							width: "100%",
 							marginVertical: 12,
