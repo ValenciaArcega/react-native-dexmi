@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-dexmi",
-    "slug": "react-native-dexmi",
+    "name": "Dexmi",
+    "slug": "Dexmi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,18 +12,31 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.reactnativedexmi"
+      "bundleIdentifier": "com.uvia.dexmi",
+      "supportsTablet": true
     },
     "android": {
+      "package": "com.uvia.dexmi",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.reactnativedexmi"
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
   }
 }

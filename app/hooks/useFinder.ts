@@ -10,7 +10,7 @@ export function useFinder({
 	title = "Buscar",
 	property
 }: FinderProps) {
-	const navigation = useNavigateApp()
+	const { navigation } = useNavigateApp()
 	const [items, setItems] = useState([]);
 	const [itemsBackup, setItemsBackup] = useState([]);
 

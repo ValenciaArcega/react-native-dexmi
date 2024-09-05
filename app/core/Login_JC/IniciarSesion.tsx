@@ -6,8 +6,8 @@ import { apiRequest } from "@/app/API/GeneralAPI";
 import { useSafeAreas } from "@/app/hooks/useSafeAreas";
 import { CustomPressable } from "./Components/Pressable";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import { Alert, Image, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { useNavigateApp } from "@/app/hooks/useNavigateApp";
 
 interface ApiResponse {
     success: boolean;
@@ -19,7 +19,7 @@ export const IniciarSesion = ({ route }) => {
     const { top, bottom } = useSafeAreaInsets();
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
-    const navigation: NavigationProp<ParamListBase> = useNavigation();
+    const { navigation } = useNavigateApp()
     const { heightHeader } = useSafeAreas()
     const { setGlobalUser } = useUser()
 
