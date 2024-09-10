@@ -12,11 +12,28 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "bundleIdentifier": "com.uvia.dexmi",
-      "supportsTablet": true
+      "bundleIdentifier": "com.jvcode.dexmi",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ],
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        },
+        "NSCameraUsageDescription": "Permitir a Dexmi acceder a tu cámara",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Permitir a Dexmi acceder a tu ubicación",
+        "NSLocationAlwaysUsageDescription": "Permitir a Dexmi acceder a tu ubicación",
+        "NSLocationWhenInUseUsageDescription": "Permitir a Dexmi acceder a tu ubicación",
+        "NSMicrophoneUsageDescription": "Permitir a Dexmi acceder a tu micrófono",
+        "NSPhotoLibraryUsageDescription": "Permitir a Dexmi acceder a tus fotos"
+      }
     },
     "android": {
-      "package": "com.uvia.dexmi",
+      "package": "com.jvcode.dexmi",
+      "softwareKeyboardLayoutMode": "pan",
+      "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
