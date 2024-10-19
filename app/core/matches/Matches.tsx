@@ -1,6 +1,5 @@
 import { appColors } from "@/app/constants/colors";
 import { useFinder } from "@/app/hooks/useFinder";
-import { CustomView } from "@/app/layout/CustomView";
 import { LoaderActivity } from "@/app/components/LoaderActivity";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useState } from "react";
@@ -42,7 +41,7 @@ export function Matches() {
 
 	if (isLoading) return <LoaderActivity />
 
-	return <CustomView isSafeArea={true}>
+	return <View className="flex-1">
 		<FlatList
 			data={items}
 			keyExtractor={(item) => item.id.toString()}
@@ -92,5 +91,5 @@ export function Matches() {
 				</TouchableOpacity>
 			)}
 		/>
-	</CustomView>
+	</View>
 }

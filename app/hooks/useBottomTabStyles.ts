@@ -1,9 +1,6 @@
-import { Platform, StyleSheet } from "react-native";
-import { useMatchMedia } from "./useMatchMedia";
+import { StyleSheet } from "react-native";
 
 export function useBottomTabStyles() {
-	const { isLargePhone, isMediumPhone } = useMatchMedia();
-
 	return StyleSheet.create({
 		tabBarStyle: {
 			height: 92,

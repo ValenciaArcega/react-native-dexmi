@@ -3,7 +3,10 @@
 		"paths": {
 			"@/*": [
 				"./*"
-			]
+			],
+			"@constants/*": [
+				"./app/constants/*"
+			],
 		}
 	},
 	"extends": "expo/tsconfig.base"
