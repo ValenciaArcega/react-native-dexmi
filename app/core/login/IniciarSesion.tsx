@@ -3,11 +3,10 @@ import { useUser } from "@/app/hooks/useUser";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { apiRequest } from "@/app/API/GeneralAPI";
-import { useSafeAreas } from "@/app/hooks/useSafeAreas";
-import { CustomPressable } from "./Components/Pressable";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Alert, Image, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { useNavigateApp } from "@/app/hooks/useNavigateApp";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 interface ApiResponse {
     success: boolean;
@@ -20,8 +19,8 @@ export const IniciarSesion = ({ route }) => {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const { navigation } = useNavigateApp()
-    const { heightHeader } = useSafeAreas()
     const { setGlobalUser } = useUser()
+    const heightHeader = useHeaderHeight();
 
     const onPressLogin = async () => {
         try {
@@ -36,16 +35,16 @@ export const IniciarSesion = ({ route }) => {
                 { 'DEX-CHANNEL': 'AppMovil' }
             );
             const json = await response.listElementsDex[0]
-            const flag = json.success
+            // const flag = json.success
 
-            if (flag) {
-                setGlobalUser({
-                    ID_USUARIO: 99,
-                    NOMBRE: "Juan Martinez",
-                    EMAIL: "jmartinez@vde-suite.com",
-                    ID_CLUB: "6235a64b5b8a5392808d67eec08e4b11",
-                })
-            }
+            // if (flag) {
+            //     setGlobalUser({
+            //         ID_USUARIO: 99,
+            //         NOMBRE: "Juan Martinez",
+            //         EMAIL: "jmartinez@vde-suite.com",
+            //         ID_CLUB: "6235a64b5b8a5392808d67eec08e4b11",
+            //     })
+            // }
         } catch (error) {
             Alert.alert("Error", "Ocurrio un error al iniciar sesión, revisa que tus credenciales sean correctas")
         }
@@ -96,7 +95,7 @@ export const IniciarSesion = ({ route }) => {
                                 onChangeText={(text) => setPassword(text)}
                                 inputMode={"text"} />
                         </View>
-                        <CustomPressable title="Iniciar Sesión" onPress={() => onPressLogin()} />
+                        {/* <CustomPressable title="Iniciar Sesión" onPress={() => onPressLogin()} /> */}
                     </View>
                 </KeyboardAvoidingView>
             </ScrollView>

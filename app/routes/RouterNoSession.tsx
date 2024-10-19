@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { IniciarSesion } from '../core/Login_JC/IniciarSesion';
-import { Home } from '../core/Login_JC/Home';
+import { IniciarSesion } from '../core/login/IniciarSesion';
+import SelectClub from '../core/login/SelectClub';
 import { useUser } from '../hooks/useUser';
 
 export function RouterNoSession() {
@@ -33,7 +33,7 @@ export function RouterNoSession() {
 		!isValidating && <stack.Navigator initialRouteName={isFirstTime ? "Onboarding" : "Home"}>
 			<stack.Screen
 				name="Home"
-				component={Home}
+				component={SelectClub}
 				options={{ headerShown: false, animation: "fade" }} />
 			<stack.Screen
 				name="IniciarSesion"

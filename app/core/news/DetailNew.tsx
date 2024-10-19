@@ -1,16 +1,14 @@
+import { AvoiderKeyboard } from "@/app/components/AvoiderKeyboard";
 import { CustomGradient } from "@/app/components/Gradient";
 import { appColors } from "@/app/constants/colors";
-import { CustomScroll } from "@/app/layout/CustomScroll";
-import { CustomView } from "@/app/layout/CustomView";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image, Pressable, Text, View } from "react-native";
 
 export function DetailNew({ route }) {
 	const { item, image } = route.params
-	console.log(image, item)
 
-	return <CustomView isSafeArea={false} style={{ backgroundColor: appColors.bgWhite }}>
-		<CustomScroll adjustContent={true}>
+	return <View className="flex-1">
+		<AvoiderKeyboard>
 			<Image source={{ uri: image }}
 				style={{
 					width: "100%",
@@ -44,6 +42,6 @@ export function DetailNew({ route }) {
 					</CustomGradient>
 				</Pressable>
 			</View>
-		</CustomScroll>
-	</CustomView >
+		</AvoiderKeyboard>
+	</View>
 }
